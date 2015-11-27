@@ -16,7 +16,19 @@ class HandlesController < ApplicationController
       config.access_token        = ENV["YOUR_ACCESS_TOKEN"]
       config.access_token_secret = ENV["YOUR_ACCESS_SECRET"]
     end
-    binding.pry
+    @tweets = @client.user_timeline('@evanahawk')
+    @tweets_num = @tweets.length
+    @characters = 0
+    @retweets = 0
+    @uris = 0
+    @tweets[1..20].each do |tweet|
+      @characters += tweet.text.length
+      @retweets += tweet.retweet_count
+      if tweet.uris?
+        @uris += 1
+      end
+    end
+    @character_avg = @characters / @tweets_num
   end
 
   # GET /handles/new
