@@ -16,7 +16,7 @@ class HandlesController < ApplicationController
       config.access_token        = ENV["YOUR_ACCESS_TOKEN"]
       config.access_token_secret = ENV["YOUR_ACCESS_SECRET"]
     end
-    @tweets = @client.user_timeline('@evanahawk')
+    @tweets = @client.user_timeline(@handle.handle_name)
     @tweets_num = @tweets.length
     @characters = 0
     @retweets = 0
